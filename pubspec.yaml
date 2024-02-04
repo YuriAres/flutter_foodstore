@@ -21,8 +21,8 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-    - lib/images/fries.png
-    - lib/images/soda.png
-    - lib/images/xburger.png
-    - lib/images/xegg.png
-    - lib/images/xbacon.png
+    - lib/assets/images/fries.png
+    - lib/assets/images/soda.png
+    - lib/assets/images/xburger.png
+    - lib/assets/images/xegg.png
+    - lib/assets/images/xbacon.png

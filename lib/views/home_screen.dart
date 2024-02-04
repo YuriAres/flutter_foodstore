@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_foodstore/controllers/item_controller.dart';
 import 'package:flutter_foodstore/widgets/background_widget.dart';
-import 'package:flutter_foodstore/widgets/box_widget.dart';
+import 'package:flutter_foodstore/widgets/box_home_widget.dart';
 import 'package:flutter_foodstore/widgets/button_widget.dart';
 import 'package:flutter_foodstore/widgets/header_widget.dart';
 import 'package:flutter_foodstore/widgets/title_widget.dart';
@@ -37,34 +38,15 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         SizedBox(
           height: MediaQuery.sizeOf(context).height * 0.23,
-          child: ListView(
+          child: ListView.builder(
+            itemCount: ItemController().sandwiches.length,
             scrollDirection: Axis.horizontal,
-            children: [
-              const BoxContainer(
-                assetPath: "lib/images/xburger.png",
-                foodname: "X-Burger",
-                isBurger: true,
-                duration: 18,
-              ),
-              SizedBox(
-                width: MediaQuery.sizeOf(context).width * 0.03,
-              ),
-              const BoxContainer(
-                assetPath: "lib/images/xegg.png",
-                foodname: "X-Egg",
-                isBurger: true,
-                duration: 15,
-              ),
-              SizedBox(
-                width: MediaQuery.sizeOf(context).width * 0.03,
-              ),
-              const BoxContainer(
-                assetPath: "lib/images/xbacon.png",
-                foodname: "X-Bacon",
-                isBurger: true,
-                duration: 20,
-              )
-            ],
+            itemBuilder: (BuildContext context, int index) {
+              return BoxContainer(
+                  assetPath: ItemController().sandwiches[index].image,
+                  foodname: ItemController().sandwiches[index].name,
+                  price: ItemController().sandwiches[index].price);
+            },
           ),
         ),
         SizedBox(
@@ -76,28 +58,22 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         SizedBox(
             height: MediaQuery.sizeOf(context).height * 0.23,
-            child: ListView(
+            child: ListView.builder(
+              itemCount: ItemController().extras.length,
               scrollDirection: Axis.horizontal,
-              children: [
-                const BoxContainer(
-                    assetPath: "lib/images/fries.png",
-                    foodname: "Fries",
-                    isBurger: false,
-                    duration: 0),
-                SizedBox(
-                  width: MediaQuery.sizeOf(context).width * 0.03,
-                ),
-                const BoxContainer(
-                    assetPath: "lib/images/soda.png",
-                    foodname: "Soft drink",
-                    isBurger: false,
-                    duration: 0),
-              ],
+              itemBuilder: (BuildContext context, int index) {
+                return BoxContainer(
+                    assetPath: ItemController().extras[index].image,
+                    foodname: ItemController().extras[index].name,
+                    price: ItemController().extras[index].price);
+              },
             )),
         SizedBox(
           height: MediaQuery.sizeOf(context).height * 0.05,
         ),
-        const CustomButton()
+        const CustomButton(
+          textButton: "Order Now",
+        )
       ],
     ));
   }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_foodstore/pages/details_screen.dart';
+import 'package:flutter_foodstore/views/details_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class BoxContainer extends StatelessWidget {
@@ -7,18 +7,17 @@ class BoxContainer extends StatelessWidget {
     Key? key,
     required this.assetPath,
     required this.foodname,
-    required this.isBurger,
-    required this.duration,
+    required this.price,
   }) : super(key: key);
 
   final String assetPath;
   final String foodname;
-  final bool isBurger;
-  final int duration;
+  final double price;
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: EdgeInsets.only(right: MediaQuery.of(context).size.width * 0.03),
       height: MediaQuery.of(context).size.height * 0.3,
       width: MediaQuery.of(context).size.width * 0.4,
       decoration: BoxDecoration(
@@ -34,8 +33,14 @@ class BoxContainer extends StatelessWidget {
         child: InkWell(
           borderRadius: BorderRadius.circular(30),
           onTap: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const DetailScreen()));
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => DetailScreen(
+                          assetPath: assetPath,
+                          foodname: foodname,
+                          price: price,
+                        )));
           },
           child: Ink(
             decoration: BoxDecoration(
@@ -48,11 +53,6 @@ class BoxContainer extends StatelessWidget {
                   height: MediaQuery.of(context).size.height * 0.15,
                   child: Image.asset(assetPath),
                 ),
-                isBurger
-                    ? Container()
-                    : SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.01,
-                      ),
                 Text(
                   foodname,
                   style: GoogleFonts.ubuntu(
@@ -65,33 +65,27 @@ class BoxContainer extends StatelessWidget {
                 SizedBox(
                   height: MediaQuery.of(context).size.height * 0.01,
                 ),
-                isBurger
-                    ? Padding(
-                        padding: EdgeInsets.only(
-                            left: MediaQuery.of(context).size.width * 0.03),
-                        child: Row(
-                          children: [
-                            const Icon(
-                              Icons.schedule,
-                              color: Color(0xff4F623D),
-                            ),
-                            SizedBox(
-                              width: MediaQuery.of(context).size.width * 0.01,
-                            ),
-                            Text(
-                              "$duration mins",
-                              style: GoogleFonts.ubuntu(
-                                height: 0.9,
-                                fontSize:
-                                    MediaQuery.of(context).size.height * 0.02,
-                                fontWeight: FontWeight.w500,
-                                color: const Color(0xff4F623D),
-                              ),
-                            ),
-                          ],
+                Padding(
+                  padding: EdgeInsets.only(
+                      left: MediaQuery.of(context).size.width * 0.03),
+                  child: Row(
+                    children: [
+                      const Icon(
+                        Icons.attach_money,
+                        color: Color(0xff4F623D),
+                      ),
+                      Text(
+                        "$price",
+                        style: GoogleFonts.ubuntu(
+                          height: 0.9,
+                          fontSize: MediaQuery.of(context).size.height * 0.02,
+                          fontWeight: FontWeight.w500,
+                          color: const Color(0xff4F623D),
                         ),
-                      )
-                    : Container(),
+                      ),
+                    ],
+                  ),
+                )
               ],
             ),
           ),

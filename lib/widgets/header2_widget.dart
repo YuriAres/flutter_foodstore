@@ -23,7 +23,7 @@ class _HeaderSecundaryState extends State<Header2> {
               },
               icon: Icon(Icons.arrow_back,
                   size: MediaQuery.of(context).size.height * 0.04,
-                  color: Color.fromARGB(255, 74, 85, 64))),
+                  color: const Color.fromARGB(255, 74, 85, 64))),
         ),
         Align(
           alignment: Alignment.center,
