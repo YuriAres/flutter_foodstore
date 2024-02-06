@@ -1,5 +1,5 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_foodstore/models/item_model.dart';
 import 'package:flutter_foodstore/widgets/background_widget.dart';
 import 'package:flutter_foodstore/widgets/box_details_widget.dart';
 import 'package:flutter_foodstore/widgets/button_widget.dart';
@@ -7,15 +7,9 @@ import 'package:flutter_foodstore/widgets/header2_widget.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class DetailScreen extends StatelessWidget {
-  const DetailScreen(
-      {super.key,
-      required this.assetPath,
-      required this.foodname,
-      required this.price});
+  const DetailScreen({super.key, required this.item});
 
-  final String assetPath;
-  final String foodname;
-  final double price;
+  final Item item;
 
   @override
   Widget build(BuildContext context) {
@@ -27,11 +21,11 @@ class DetailScreen extends StatelessWidget {
         SizedBox(
           height: MediaQuery.of(context).size.height * 0.04,
         ),
-        DetailContainer(assetPath: assetPath),
+        DetailContainer(assetPath: item.image),
         SizedBox(
           height: MediaQuery.of(context).size.height * 0.02,
         ),
-        Text(foodname,
+        Text(item.name,
             style: GoogleFonts.ubuntu(
                 fontSize: MediaQuery.sizeOf(context).height * 0.038,
                 fontWeight: FontWeight.w700,
@@ -41,8 +35,7 @@ class DetailScreen extends StatelessWidget {
         ),
         SizedBox(
           width: MediaQuery.of(context).size.width * 0.83,
-          child: Text(
-              "A delicius Burger with bread, tomatoes, beef, cheese, pepino and cebola.",
+          child: Text(item.description,
               textAlign: TextAlign.justify,
               style: GoogleFonts.ubuntu(
                   fontSize: MediaQuery.sizeOf(context).height * 0.023,
@@ -78,7 +71,7 @@ class DetailScreen extends StatelessWidget {
               SizedBox(
                 width: MediaQuery.of(context).size.width * 0.01,
               ),
-              Text("$price Dollars",
+              Text("${item.price} Dollars",
                   style: GoogleFonts.ubuntu(
                       fontSize: MediaQuery.sizeOf(context).height * 0.025,
                       fontWeight: FontWeight.w500,
@@ -89,8 +82,9 @@ class DetailScreen extends StatelessWidget {
         SizedBox(
           height: MediaQuery.of(context).size.height * 0.03,
         ),
-        const CustomButton(
+        CustomButton(
           textButton: "Add to cart",
+          buttonFunc: () {},
         )
       ],
     )));

@@ -1,18 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_foodstore/models/item_model.dart';
 import 'package:flutter_foodstore/views/details_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class BoxContainer extends StatelessWidget {
   const BoxContainer({
+    required this.item,
     Key? key,
-    required this.assetPath,
-    required this.foodname,
-    required this.price,
   }) : super(key: key);
 
-  final String assetPath;
-  final String foodname;
-  final double price;
+  final Item item;
 
   @override
   Widget build(BuildContext context) {
@@ -37,9 +34,7 @@ class BoxContainer extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                     builder: (context) => DetailScreen(
-                          assetPath: assetPath,
-                          foodname: foodname,
-                          price: price,
+                          item: item,
                         )));
           },
           child: Ink(
@@ -51,10 +46,10 @@ class BoxContainer extends StatelessWidget {
               children: [
                 SizedBox(
                   height: MediaQuery.of(context).size.height * 0.15,
-                  child: Image.asset(assetPath),
+                  child: Image.asset(item.image),
                 ),
                 Text(
-                  foodname,
+                  item.name,
                   style: GoogleFonts.ubuntu(
                     height: 0.9,
                     fontSize: MediaQuery.of(context).size.height * 0.022,
@@ -75,7 +70,7 @@ class BoxContainer extends StatelessWidget {
                         color: Color(0xff4F623D),
                       ),
                       Text(
-                        "$price",
+                        item.price.toStringAsFixed(2),
                         style: GoogleFonts.ubuntu(
                           height: 0.9,
                           fontSize: MediaQuery.of(context).size.height * 0.02,

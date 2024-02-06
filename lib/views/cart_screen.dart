@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_foodstore/controllers/item_controller.dart';
+import 'package:flutter_foodstore/views/payment_screen.dart';
 import 'package:flutter_foodstore/widgets/background_widget.dart';
+import 'package:flutter_foodstore/widgets/box_cart_widget.dart';
 import 'package:flutter_foodstore/widgets/button_widget.dart';
 import 'package:flutter_foodstore/widgets/header2_widget.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -20,14 +23,21 @@ class _CartScreenState extends State<CartScreen> {
         const Header2(
           title: "Cart",
         ),
+        SizedBox(height: MediaQuery.of(context).size.height * 0.03),
         SizedBox(
-          height: MediaQuery.of(context).size.height * 0.72,
+          height: MediaQuery.of(context).size.height * 0.685,
           width: MediaQuery.of(context).size.width,
           child: ListView(
             children: [
-              ListTile(
-                title: Text("Teste"),
-              )
+              BoxCart(
+                item: ItemController().sandwiches[0],
+              ),
+              BoxCart(
+                item: ItemController().sandwiches[1],
+              ),
+              BoxCart(item: ItemController().sandwiches[2]),
+              BoxCart(item: ItemController().extras[0]),
+              BoxCart(item: ItemController().extras[1]),
             ],
           ),
         ),
@@ -50,7 +60,13 @@ class _CartScreenState extends State<CartScreen> {
         SizedBox(
           height: MediaQuery.of(context).size.height * 0.018,
         ),
-        CustomButton(textButton: "Payment")
+        CustomButton(
+            textButton: "Payment",
+            buttonFunc: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return const PaymentScreen();
+              }));
+            })
       ],
     ));
   }

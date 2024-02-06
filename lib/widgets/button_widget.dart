@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CustomButton extends StatelessWidget {
-  const CustomButton({super.key, required this.textButton});
+  const CustomButton(
+      {super.key, required this.textButton, required this.buttonFunc});
 
   final String textButton;
+  final Function buttonFunc;
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +21,9 @@ class CustomButton extends StatelessWidget {
                     borderRadius: BorderRadius.circular(15)),
                 backgroundColor: const Color(0xff7A8B66),
               ),
-              onPressed: () {},
+              onPressed: () {
+                buttonFunc();
+              },
               child: Text(textButton,
                   style: GoogleFonts.ubuntu(
                       fontSize: MediaQuery.sizeOf(context).height * 0.03,

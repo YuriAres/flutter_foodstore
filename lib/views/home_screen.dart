@@ -43,9 +43,8 @@ class _HomeScreenState extends State<HomeScreen> {
             scrollDirection: Axis.horizontal,
             itemBuilder: (BuildContext context, int index) {
               return BoxContainer(
-                  assetPath: ItemController().sandwiches[index].image,
-                  foodname: ItemController().sandwiches[index].name,
-                  price: ItemController().sandwiches[index].price);
+                item: ItemController().sandwiches[index],
+              );
             },
           ),
         ),
@@ -63,16 +62,16 @@ class _HomeScreenState extends State<HomeScreen> {
               scrollDirection: Axis.horizontal,
               itemBuilder: (BuildContext context, int index) {
                 return BoxContainer(
-                    assetPath: ItemController().extras[index].image,
-                    foodname: ItemController().extras[index].name,
-                    price: ItemController().extras[index].price);
+                  item: ItemController().extras[index],
+                );
               },
             )),
         SizedBox(
           height: MediaQuery.sizeOf(context).height * 0.05,
         ),
-        const CustomButton(
+        CustomButton(
           textButton: "Order Now",
+          buttonFunc: () {},
         )
       ],
     ));
