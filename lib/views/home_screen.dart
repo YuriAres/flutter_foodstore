@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_foodstore/controllers/item_controller.dart';
+import 'package:flutter_foodstore/models/cart_model.dart';
 import 'package:flutter_foodstore/widgets/background_widget.dart';
 import 'package:flutter_foodstore/widgets/box_home_widget.dart';
-import 'package:flutter_foodstore/widgets/button_widget.dart';
 import 'package:flutter_foodstore/widgets/header_widget.dart';
 import 'package:flutter_foodstore/widgets/title_widget.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  const HomeScreen({super.key, required this.cart});
+  final Cart cart;
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -21,7 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
         body: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Header(),
+        Header(cart: widget.cart),
         SizedBox(
           height: MediaQuery.sizeOf(context).height * 0.02,
         ),
@@ -44,6 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
             itemBuilder: (BuildContext context, int index) {
               return BoxContainer(
                 item: ItemController().sandwiches[index],
+                cart: widget.cart,
               );
             },
           ),
@@ -63,16 +65,10 @@ class _HomeScreenState extends State<HomeScreen> {
               itemBuilder: (BuildContext context, int index) {
                 return BoxContainer(
                   item: ItemController().extras[index],
+                  cart: widget.cart,
                 );
               },
             )),
-        SizedBox(
-          height: MediaQuery.sizeOf(context).height * 0.05,
-        ),
-        CustomButton(
-          textButton: "Order Now",
-          buttonFunc: () {},
-        )
       ],
     ));
   }

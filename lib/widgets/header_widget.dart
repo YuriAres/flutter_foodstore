@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_foodstore/models/cart_model.dart';
 import 'package:flutter_foodstore/views/cart_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class Header extends StatelessWidget {
-  const Header({super.key});
+  const Header({super.key, required this.cart});
+
+  final Cart cart;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +23,9 @@ class Header extends StatelessWidget {
         IconButton(
             onPressed: () {
               Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return const CartScreen();
+                return CartScreen(
+                  cart: cart,
+                );
               }));
             },
             icon: Icon(

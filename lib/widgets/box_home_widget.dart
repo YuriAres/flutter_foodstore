@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_foodstore/models/cart_model.dart';
 import 'package:flutter_foodstore/models/item_model.dart';
 import 'package:flutter_foodstore/views/details_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -6,10 +7,12 @@ import 'package:google_fonts/google_fonts.dart';
 class BoxContainer extends StatelessWidget {
   const BoxContainer({
     required this.item,
+    required this.cart,
     Key? key,
   }) : super(key: key);
 
   final Item item;
+  final Cart cart;
 
   @override
   Widget build(BuildContext context) {
@@ -35,6 +38,7 @@ class BoxContainer extends StatelessWidget {
                 MaterialPageRoute(
                     builder: (context) => DetailScreen(
                           item: item,
+                          cart: cart,
                         )));
           },
           child: Ink(

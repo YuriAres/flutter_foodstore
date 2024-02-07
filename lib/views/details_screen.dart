@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_foodstore/models/cart_model.dart';
 import 'package:flutter_foodstore/models/item_model.dart';
 import 'package:flutter_foodstore/widgets/background_widget.dart';
 import 'package:flutter_foodstore/widgets/box_details_widget.dart';
@@ -7,8 +8,9 @@ import 'package:flutter_foodstore/widgets/header2_widget.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class DetailScreen extends StatelessWidget {
-  const DetailScreen({super.key, required this.item});
+  const DetailScreen({super.key, required this.item, required this.cart});
 
+  final Cart cart;
   final Item item;
 
   @override
@@ -84,7 +86,28 @@ class DetailScreen extends StatelessWidget {
         ),
         CustomButton(
           textButton: "Add to cart",
-          buttonFunc: () {},
+          buttonFunc: () {
+            if (!cart.addtoCart(item)) {
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    title: const Text("Warning"),
+                    content: const Text(
+                        "The item has already been added to the cart and cannot be added again."),
+                    actions: <Widget>[
+                      TextButton(
+                        child: const Text("OK"),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                    ],
+                  );
+                },
+              );
+            }
+          },
         )
       ],
     )));
